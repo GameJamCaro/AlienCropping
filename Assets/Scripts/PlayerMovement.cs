@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
     public KeyCode jumpKey = KeyCode.Space;
 
+    public Animator anim;
+
+    public MusicManager musicManager;
+
 
     private void Start()
     {
@@ -68,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
+            anim.SetTrigger("jump");
         }
     }
 
@@ -75,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
     void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
 
         if (grounded)
         {
@@ -84,6 +90,24 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * speed * 10 * airMultiplier, ForceMode.Force);
         }
+
+        if(verticalInput != 0 || horizontalInput != 0)
+        {
+            anim.SetBool("walking", true);
+            
+        }
+        else
+        {
+            anim.SetBool("walking", false);
+            
+        }
+        
+    }
+
+    public void Shoot()
+    {
+        
+        anim.SetTrigger("shoot");
     }
 
     void SpeedControl()

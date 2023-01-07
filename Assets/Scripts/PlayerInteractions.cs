@@ -18,6 +18,10 @@ public class PlayerInteractions : MonoBehaviour
             {
                 GameManager.AddScore(changer.changeAmount);
             }
+            if (changer.changeType == Changer.ChangeType.Seed)
+            {
+                GameManager.AddSeed(1);
+            }
             if (changer.destroyAfterCollsion)
             {
                 Destroy(other.gameObject);

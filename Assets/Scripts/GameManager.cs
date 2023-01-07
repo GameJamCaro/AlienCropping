@@ -9,10 +9,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     int playerScore;
+    int seedScore;
 
     public ScoreDisplay[] scoreUIs;
 
-
+    private void Start()
+    {
+        seed = 0;
+        score = 0;
+    }
 
 
     private void Awake()
@@ -39,17 +44,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static int seed
+    {
+        get
+        {
+            return instance.seedScore;
+        }
+        set
+        {
+            instance.seedScore = value;
+        }
+    }
+
     public static void AddScore(int scoreAmount)
     {
         score += scoreAmount;
         GameManager.UpdateUI();    
         
     }
+    public static void AddSeed(int scoreAmount)
+    {
+        seed += scoreAmount;
+        Debug.Log(seed);
+        GameManager.UpdateUI();
+       
+
+    }
 
     public static void UpdateUI()
     {
-        Debug.Log("Update UI");
+       
         instance.scoreUIs[0].DisplayScore();
+        instance.scoreUIs[1].DisplayScore();
     }
 
     

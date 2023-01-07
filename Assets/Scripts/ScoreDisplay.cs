@@ -22,8 +22,11 @@ public class ScoreDisplay : MonoBehaviour
         if (displayText != null)
         {
             if (scoreID == 0)
-                displayText.text = "score: " + GameManager.score;
-           
+                displayText.text = "crops: " + GameManager.score;
+
+            if (scoreID == 1)
+                displayText.text = "seeds: " + GameManager.seed;
+
 
         }
     }

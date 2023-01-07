@@ -6,7 +6,7 @@ public class Changer : MonoBehaviour
 {
     public int changeAmount;
     public bool destroyAfterCollsion;
-    public enum ChangeType {Health, Score};
+    public enum ChangeType {Health, Score, Seed};
     public ChangeType changeType;
 
 

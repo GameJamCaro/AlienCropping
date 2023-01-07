@@ -21,6 +21,8 @@ public class ThirdPersonCam : MonoBehaviour
     public GameObject combatCam;
     public GameObject topDownCam;
 
+    public MusicManager musicManager;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -48,6 +50,11 @@ public class ThirdPersonCam : MonoBehaviour
             {
                 playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
             }
+            if (musicManager.clipIndex != 0)
+            {
+                musicManager.MusicSwitch(0);
+            }
+
         }
         else if(currentCamStyle == CameraStyle.Combat)
         {
@@ -55,10 +62,16 @@ public class ThirdPersonCam : MonoBehaviour
             orientation.forward = dirToCombatLookAt.normalized;
 
             playerObj.forward = dirToCombatLookAt.normalized;
+            if (musicManager.clipIndex == 0)
+            {
+                int random = Random.Range(1, 3);
+                musicManager.MusicSwitch(random);
+                Debug.Log(random);
+            }
         }
     }
 
-    void SwitchCamStyle(CameraStyle cameraStyle)
+    public void SwitchCamStyle(CameraStyle cameraStyle)
     {
         newCamStyle = cameraStyle;
 

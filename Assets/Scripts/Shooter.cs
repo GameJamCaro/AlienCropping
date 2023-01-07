@@ -17,6 +17,9 @@ public class Shooter : MonoBehaviour
     public float shotInterval = 1;
     bool doNotShoot;
     public float shootDistance = 10;
+    public ThirdPersonCam cam;
+
+    public PlayerMovement player;
 
 
     private void Start()
@@ -32,6 +35,12 @@ public class Shooter : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                player.Shoot();
+                if (cam.currentCamStyle != ThirdPersonCam.CameraStyle.Combat)
+                {
+                    cam.SwitchCamStyle(ThirdPersonCam.CameraStyle.Combat);
+                    StartCoroutine(WaitAndResetCam());
+                }
                 if (Time.time > fireRate + lastShot)
                 {
                     clone = Instantiate(projectile, transform.position, transform.rotation);
@@ -41,6 +50,7 @@ public class Shooter : MonoBehaviour
                     lastShot = Time.time;
                 }
                 Destroy(clone.gameObject, 3);
+                timer = 3;
             }
         }
         else
@@ -80,6 +90,23 @@ public class Shooter : MonoBehaviour
             
             doNotShoot = false;
             StartCoroutine(WaitAndShoot());
+        }
+    }
+
+    int timer = 3;
+
+
+    IEnumerator WaitAndResetCam()
+    {
+        yield return new WaitForSeconds(1);
+        timer--;
+        if (timer == 0)
+        {
+            cam.SwitchCamStyle(ThirdPersonCam.CameraStyle.Basic);
+        }
+        else
+        {
+            StartCoroutine(WaitAndResetCam());
         }
     }
 }

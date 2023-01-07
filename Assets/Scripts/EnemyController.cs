@@ -7,8 +7,8 @@ public class EnemyController : MonoBehaviour
     public int health = 5;
     public enum EnemyState {Dangerous, Vulnerable};
     public EnemyState state;
-    public GameObject crop;
-    public int cropNumber = 5;
+    public GameObject[] drops;
+    public int dropNumber = 5;
     Quaternion spreadRotation;
 
 
@@ -28,10 +28,10 @@ public class EnemyController : MonoBehaviour
             }
             if (health == 0)
             {
-                for (int i = 0; i < cropNumber; i++)
+                for (int i = 0; i < dropNumber; i++)
                 {
                     spreadRotation.eulerAngles = new Vector3(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180));
-                    Instantiate(crop, transform.position, spreadRotation);
+                    Instantiate(drops[Random.Range(0, drops.Length)], transform.position, spreadRotation);
                 }
                 Destroy(gameObject);
             }

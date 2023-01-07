@@ -6,13 +6,12 @@ using UnityEngine.UI;
 
 public class TimeManager : MonoBehaviour
 {
-    public TextMeshProUGUI timeUI;
-    public TextMeshProUGUI seasonUI;
-    public TextMeshProUGUI finalScoreUI;
-    public TextMeshProUGUI highScoreUI;
-    public int seasonTime;
+   
+    public int waveTime;
     int tempTime;
-    public int season;
+
+    public GameObject[] waves;
+
     public GameObject winPanel;
     public Camera cam;
 
@@ -27,12 +26,17 @@ public class TimeManager : MonoBehaviour
     public Color fallColor;
     public Color winterColor;
 
-    public GameObject seasonPanel;
-    public TextMeshProUGUI seasonText;
+    public TextMeshProUGUI timeUI;
+    public TextMeshProUGUI waveUI;
+    public TextMeshProUGUI finalScoreUI;
+    public TextMeshProUGUI highScoreUI;
 
-    string currentSeason;
+    public GameObject wavePanel;
 
-    
+
+    string currentWave;
+
+    int waveNum;
 
     public bool win;
 
@@ -49,9 +53,9 @@ public class TimeManager : MonoBehaviour
         
         audioSource = GetComponent<AudioSource>();
 
-        tempTime = seasonTime;
+        tempTime = waveTime;
         SetSeason();
-        season = 0;
+        
         
         StartCoroutine(CountDown());
       
@@ -61,8 +65,8 @@ public class TimeManager : MonoBehaviour
     {
         if(tempTime == 0)
         {
-            season++;
-            tempTime = seasonTime;
+            waveNum++;
+            tempTime = waveTime;
             timeUI.text = tempTime.ToString();
             SetSeason();
         }
@@ -70,41 +74,42 @@ public class TimeManager : MonoBehaviour
 
     void SetSeason()
     {
-        switch(season)
+        switch(waveNum)
         {
             case 0:
                 
-                currentSeason = "Summer";
+                currentWave = "The Arrival";
                 audioSource.clip = summerAmbient;
-                seasonPanel.GetComponent<Image>().color = summerColor;
-                seasonUI.text = currentSeason;
                 cam.backgroundColor = summerColor;
-                
                 StartCoroutine(SeasonInfo());
-
                 break;
             case 1:
-              
-                currentSeason = "Fall";
+                currentWave = "Seeding time";
                 audioSource.clip = fallAmbient;
-                seasonPanel.GetComponent<Image>().color = fallColor;
-                seasonUI.text = currentSeason;
+                waveUI.text = currentWave;
                 cam.backgroundColor = fallColor;
-               
                 StartCoroutine(SeasonInfo());
                 break;
             case 2:
                
-                currentSeason = "Winter";
+                currentWave = "Fight for your crops";
                 audioSource.clip = winterAmbient;
-                seasonPanel.GetComponent<Image>().color = winterColor;
-                seasonPanel.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
-                seasonUI.text = currentSeason;
+                
+                waveUI.text = currentWave;
                 cam.backgroundColor = winterColor;
               
                 StartCoroutine(SeasonInfo());
                 break;
             case 3:
+                currentWave = "Harvest Moon";
+                audioSource.clip = winterAmbient;
+
+                waveUI.text = currentWave;
+                cam.backgroundColor = winterColor;
+
+                StartCoroutine(SeasonInfo());
+                break;
+            case 4:
                 win = true;
                
                 StopAllCoroutines();
@@ -136,10 +141,10 @@ public class TimeManager : MonoBehaviour
     public IEnumerator SeasonInfo()
     {
         
-        seasonPanel.SetActive(true);
-        seasonText.text = currentSeason;
+        wavePanel.SetActive(true);
+        waveUI.text = currentWave;
         yield return new WaitForSeconds(1);
-        seasonPanel.SetActive(false);
+        wavePanel.SetActive(false);
         yield return new WaitForSeconds(1);
        
 
