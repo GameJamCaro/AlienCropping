@@ -7,15 +7,26 @@ public class PlayerInteractions : MonoBehaviour
     public HealthBar healthBar;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NiceCrop"))
+        if (other.GetComponent<Changer>() != null)
         {
-            Destroy(other.gameObject);
-            healthBar.ChangeHealth(1);
+            Changer changer = other.GetComponent<Changer>();
+            if (changer.changeType == Changer.ChangeType.Health)
+            {
+                healthBar.ChangeHealth(changer.changeAmount);
+            }
+            if (changer.changeType == Changer.ChangeType.Score)
+            {
+                GameManager.AddScore(changer.changeAmount);
+            }
+            if (changer.destroyAfterCollsion)
+            {
+                Destroy(other.gameObject);
+            }
         }
-        if (other.CompareTag("BadCrop"))
+        if(other.GetComponent<ScoreChanger>() != null)
         {
-            healthBar.ChangeHealth(-1);
-            Debug.Log("au");
+            ScoreChanger scoreChanger = other.GetComponent<ScoreChanger>();
         }
+        
     }
 }

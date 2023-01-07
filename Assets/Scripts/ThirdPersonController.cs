@@ -41,7 +41,7 @@ public class ThirdPersonController : MonoBehaviour
 
         anim = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
       
             //// saves cam speed from inspector
@@ -56,11 +56,16 @@ public class ThirdPersonController : MonoBehaviour
    
     void Update()
     {
-       
-            //// enables cam movement
-            //thirdPersonCam.m_XAxis.m_MaxSpeed = camSpeedX;
-            //thirdPersonCam.m_YAxis.m_MaxSpeed = camSpeedY;
 
+        //// enables cam movement
+        //thirdPersonCam.m_XAxis.m_MaxSpeed = camSpeedX;
+        //thirdPersonCam.m_YAxis.m_MaxSpeed = camSpeedY;
+        //if (Input.GetButtonDown("Fire1"))
+        //{
+        //    Vector3 mousePos = Input.mousePosition;
+        //    mousePos.y = 0;
+        //    transform.LookAt(mousePos);
+        //}
 
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");

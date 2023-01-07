@@ -4,8 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - NiceCrop
-  - BadCrop
+  - Projectile
   - PlayerProjectile
   layers:
   - Default
@@ -15,7 +14,7 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - whatIsGround
   - 
   - 
   - 
