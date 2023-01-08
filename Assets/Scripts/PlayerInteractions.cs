@@ -22,7 +22,7 @@ public class PlayerInteractions : MonoBehaviour
             }
             else
             {
-                info.text = "Growing Area";
+                info.text = "Growing Area - press G";
                 Instantiate(moleHill, transform.position, Quaternion.identity);
                 GameManager.UseSeed(1);
             }
@@ -35,7 +35,8 @@ public class PlayerInteractions : MonoBehaviour
         if(other.CompareTag("GrowingArea"))
         {
             inGrowingArea = true;
-            info.text = "Growing Area";
+            info.text = "Growing Area" +
+                " - press G";
         }
         if (other.GetComponent<Changer>() != null)
         {

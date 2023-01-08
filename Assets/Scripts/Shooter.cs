@@ -24,10 +24,13 @@ public class Shooter : MonoBehaviour
     public float camResetTime = 5;
     float timer;
 
+    public Transform shotLocation;
+
 
     private void Start()
     {
         timer = camResetTime;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 
@@ -39,11 +42,7 @@ public class Shooter : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 player.Shoot();
-                if (cam.currentCamStyle != ThirdPersonCam.CameraStyle.Combat)
-                {
-                    cam.SwitchCamStyle(ThirdPersonCam.CameraStyle.Combat);
-                    StartCoroutine(WaitAndResetCam());
-                }
+                
                 if (Time.time > fireRate + lastShot)
                 {
                     clone = Instantiate(projectile, transform.position, transform.rotation);
@@ -60,6 +59,9 @@ public class Shooter : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, target.position) < shootDistance && !doNotShoot)
             {
+                Vector3 targetPos = target.position;
+                // targetPos.y = 0;
+                transform.LookAt(targetPos);
                 StartCoroutine(WaitAndShoot());
                 doNotShoot = true;
 
@@ -72,14 +74,14 @@ public class Shooter : MonoBehaviour
 
         void ShootAtTarget() 
         {
-            transform.LookAt(target);
             
-                clone = Instantiate(projectile, transform.position, transform.rotation);
+            
+                clone = Instantiate(projectile, shotLocation.position, shotLocation.rotation );
 
                 clone.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
 
                 
-            Destroy(clone.gameObject, 3);
+            Destroy(clone.gameObject, 2);
         }
 
 
@@ -109,6 +111,16 @@ public class Shooter : MonoBehaviour
         }
         else
         {
+            StartCoroutine(WaitAndResetCam());
+        }
+    }
+
+
+    public void CameraSwitch()
+    {
+        if (cam.currentCamStyle != ThirdPersonCam.CameraStyle.Combat)
+        {
+            cam.SwitchCamStyle(ThirdPersonCam.CameraStyle.Combat);
             StartCoroutine(WaitAndResetCam());
         }
     }

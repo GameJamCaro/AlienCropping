@@ -27,6 +27,11 @@ public class AlienController : MonoBehaviour
     void Update()
     {
         agent.SetDestination(player.transform.position);
+
+        if(Vector3.Distance(transform.position, player.transform.position) < 30)
+        {
+            player.GetComponentInChildren<Shooter>().CameraSwitch();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

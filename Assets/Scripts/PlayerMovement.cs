@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator anim;
 
-    public MusicManager musicManager;
+    
 
 
     private void Start()
