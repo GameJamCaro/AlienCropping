@@ -21,10 +21,13 @@ public class Shooter : MonoBehaviour
 
     public PlayerMovement player;
 
+    public float camResetTime = 5;
+    float timer;
+
 
     private void Start()
     {
-        
+        timer = camResetTime;
     }
 
 
@@ -49,8 +52,8 @@ public class Shooter : MonoBehaviour
 
                     lastShot = Time.time;
                 }
-                Destroy(clone.gameObject, 3);
-                timer = 3;
+                Destroy(clone.gameObject, 2);
+                timer = camResetTime;
             }
         }
         else
@@ -93,7 +96,7 @@ public class Shooter : MonoBehaviour
         }
     }
 
-    int timer = 3;
+    
 
 
     IEnumerator WaitAndResetCam()

@@ -71,6 +71,16 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public static void UseSeed(int scoreAmount)
+    {
+        seed -= scoreAmount;
+        Debug.Log(seed);
+        GameManager.UpdateUI();
+
+
+    }
+
+
     public static void UpdateUI()
     {
        

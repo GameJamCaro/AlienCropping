@@ -1,12 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerInteractions : MonoBehaviour
 {
     public HealthBar healthBar;
+    public GameObject moleHill;
+    public TextMeshProUGUI info;
+    bool inGrowingArea;
+
+
+    private void Update()
+    {
+
+        if(Input.GetKeyDown(KeyCode.G) && inGrowingArea)
+        {
+            if (GameManager.seed < 1)
+            {
+                info.text = "You do not have any seeds";
+            }
+            else
+            {
+                info.text = "Growing Area";
+                Instantiate(moleHill, transform.position, Quaternion.identity);
+                GameManager.UseSeed(1);
+            }
+        }
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag("GrowingArea"))
+        {
+            inGrowingArea = true;
+            info.text = "Growing Area";
+        }
         if (other.GetComponent<Changer>() != null)
         {
             Changer changer = other.GetComponent<Changer>();
@@ -32,5 +62,14 @@ public class PlayerInteractions : MonoBehaviour
             ScoreChanger scoreChanger = other.GetComponent<ScoreChanger>();
         }
         
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("GrowingArea"))
+        {
+            inGrowingArea = false;
+            info.text = "";
+        }
     }
 }
