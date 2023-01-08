@@ -25,6 +25,7 @@ public class Menu : MonoBehaviour
 
     public void PlayAgain()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 }

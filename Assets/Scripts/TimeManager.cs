@@ -54,7 +54,7 @@ public class TimeManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         tempTime = waveTime;
-        SetSeason();
+        //SetSeason();
         
         
         StartCoroutine(CountDown());
@@ -67,7 +67,7 @@ public class TimeManager : MonoBehaviour
         {
             waveNum++;
             tempTime = waveTime;
-            timeUI.text = tempTime.ToString();
+           // timeUI.text = tempTime.ToString();
             SetSeason();
         }
     }
@@ -77,52 +77,54 @@ public class TimeManager : MonoBehaviour
         switch(waveNum)
         {
             case 0:
-                
-                currentWave = "The Arrival";
-                audioSource.clip = summerAmbient;
-                cam.backgroundColor = summerColor;
-                StartCoroutine(SeasonInfo());
+                waves[waveNum].gameObject.SetActive(true);
+                //currentWave = "The Arrival";
+                //audioSource.clip = summerAmbient;
+                //cam.backgroundColor = summerColor;
+                //StartCoroutine(SeasonInfo());
                 break;
             case 1:
-                currentWave = "Seeding time";
-                audioSource.clip = fallAmbient;
-                waveUI.text = currentWave;
-                cam.backgroundColor = fallColor;
-                StartCoroutine(SeasonInfo());
+                waves[waveNum].gameObject.SetActive(true);
+                //currentWave = "Seeding time";
+                //audioSource.clip = fallAmbient;
+                //waveUI.text = currentWave;
+                //cam.backgroundColor = fallColor;
+                //StartCoroutine(SeasonInfo());
                 break;
             case 2:
-               
-                currentWave = "Fight for your crops";
-                audioSource.clip = winterAmbient;
-                
-                waveUI.text = currentWave;
-                cam.backgroundColor = winterColor;
-              
-                StartCoroutine(SeasonInfo());
+                waves[waveNum].gameObject.SetActive(true);
+                //currentWave = "Fight for your crops";
+                //audioSource.clip = winterAmbient;
+
+                //waveUI.text = currentWave;
+                //cam.backgroundColor = winterColor;
+
+                //StartCoroutine(SeasonInfo());
                 break;
             case 3:
-                currentWave = "Harvest Moon";
-                audioSource.clip = winterAmbient;
+                waves[waveNum].gameObject.SetActive(true);
+                //currentWave = "Harvest Moon";
+                //audioSource.clip = winterAmbient;
 
-                waveUI.text = currentWave;
-                cam.backgroundColor = winterColor;
+                //waveUI.text = currentWave;
+                //cam.backgroundColor = winterColor;
 
-                StartCoroutine(SeasonInfo());
+                //StartCoroutine(SeasonInfo());
                 break;
             case 4:
                 win = true;
                
-                StopAllCoroutines();
-                Time.timeScale = 0;
-                audioSource.clip = springAmbient;
-                winPanel.SetActive(true);
-                finalScoreUI.text = "Nutrition saved: ";
-                highScoreUI.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
+                //StopAllCoroutines();
+                //Time.timeScale = 0;
+                //audioSource.clip = springAmbient;
+                //winPanel.SetActive(true);
+                //finalScoreUI.text = "Nutrition saved: ";
+                //highScoreUI.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
                 break;
 
         }
 
-        audioSource.Play();
+        //audioSource.Play();
 
 
 
@@ -132,7 +134,7 @@ public class TimeManager : MonoBehaviour
 
     public IEnumerator CountDown()
     {
-        timeUI.text = tempTime.ToString();
+        //timeUI.text = tempTime.ToString();
         yield return new WaitForSeconds(1);
         tempTime--;
         StartCoroutine(CountDown());

@@ -705,7 +705,7 @@ MonoBehaviour:
   health: 5
   drops:
   - {fileID: 5578964996217731775, guid: 0915989adb9fb634a9b4665e7218ef6e, type: 3}
-  - {fileID: 5578964996217731775, guid: 5828451da2547094a93a377afb3441f4, type: 3}
+  - {fileID: 5578964996217731775, guid: 00ddef422793b6c47b76e30981698bd7, type: 3}
   - {fileID: 5578964996217731775, guid: 00ddef422793b6c47b76e30981698bd7, type: 3}
   - {fileID: 5578964996217731775, guid: 00ddef422793b6c47b76e30981698bd7, type: 3}
   dropNumber: 5
@@ -721,7 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c3cf8de5948abc45a40d82885d706f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeAmount: -3
+  changeAmount: -5
   destroyAfterCollsion: 0
   changeType: 0
 --- !u!1 &5865051811193485959

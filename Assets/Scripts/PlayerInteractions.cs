@@ -9,7 +9,14 @@ public class PlayerInteractions : MonoBehaviour
     public GameObject moleHill;
     public TextMeshProUGUI info;
     bool inGrowingArea;
+    public GameObject deathPanel;
 
+
+    private void Start()
+    {
+        //deathPanel.SetActive(false);
+        Time.timeScale = 1;
+    }
 
     private void Update()
     {
@@ -44,6 +51,13 @@ public class PlayerInteractions : MonoBehaviour
             if (changer.changeType == Changer.ChangeType.Health)
             {
                 healthBar.ChangeHealth(changer.changeAmount);
+                if(healthBar.currentHealth < 1)
+                {
+                    deathPanel.SetActive(true);
+                    Cursor.visible = true;
+                    //Time.timeScale = 0;
+                    
+                }
             }
             if (changer.changeType == Changer.ChangeType.Score)
             {
