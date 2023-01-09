@@ -6,6 +6,7 @@ public class PlantController : MonoBehaviour
 {
     public GameObject plant;
 
+
     private void Start()
     {
         plant.SetActive(false);
@@ -14,7 +15,7 @@ public class PlantController : MonoBehaviour
 
     IEnumerator WaitAndGrow()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(Random.Range(5,10));
         plant.SetActive(true);
     }
 }

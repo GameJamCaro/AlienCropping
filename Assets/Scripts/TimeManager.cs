@@ -36,7 +36,7 @@ public class TimeManager : MonoBehaviour
 
     string currentWave;
 
-    int waveNum;
+    int waveNum = 0;
 
     public bool win;
 
@@ -63,12 +63,37 @@ public class TimeManager : MonoBehaviour
 
     private void Update()
     {
-        if(tempTime == 0)
+        if (tempTime == 40)
         {
-            waveNum++;
-            tempTime = waveTime;
-           // timeUI.text = tempTime.ToString();
-            SetSeason();
+
+
+
+            // timeUI.text = tempTime.ToString();
+            //SetSeason(); 
+            waves[0].gameObject.SetActive(true);
+            Debug.Log("wave 1");
+           
+        }
+        if (tempTime == 120)
+        {
+
+
+
+            // timeUI.text = tempTime.ToString();
+            //SetSeason(); 
+            waves[1].gameObject.SetActive(true);
+            Debug.Log("wave 2");
+
+        }
+        if (tempTime == 240)
+        {
+
+            Debug.Log("wave 3");
+
+            // timeUI.text = tempTime.ToString();
+            //SetSeason(); 
+            waves[2].gameObject.SetActive(true);
+            
         }
     }
 
@@ -82,6 +107,7 @@ public class TimeManager : MonoBehaviour
                 //audioSource.clip = summerAmbient;
                 //cam.backgroundColor = summerColor;
                 //StartCoroutine(SeasonInfo());
+                waveTime += 10;
                 break;
             case 1:
                 waves[waveNum].gameObject.SetActive(true);
@@ -102,7 +128,7 @@ public class TimeManager : MonoBehaviour
                 //StartCoroutine(SeasonInfo());
                 break;
             case 3:
-                waves[waveNum].gameObject.SetActive(true);
+               // waves[waveNum].gameObject.SetActive(true);
                 //currentWave = "Harvest Moon";
                 //audioSource.clip = winterAmbient;
 
@@ -136,7 +162,8 @@ public class TimeManager : MonoBehaviour
     {
         //timeUI.text = tempTime.ToString();
         yield return new WaitForSeconds(1);
-        tempTime--;
+        tempTime++;
+        
         StartCoroutine(CountDown());
     }
 

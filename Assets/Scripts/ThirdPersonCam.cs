@@ -36,9 +36,9 @@ public class ThirdPersonCam : MonoBehaviour
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchCamStyle(CameraStyle.Basic);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchCamStyle(CameraStyle.Combat);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchCamStyle(CameraStyle.Topdown);
+        if (Input.GetKeyDown(KeyCode.E)) SwitchCamStyle(CameraStyle.Basic);
+        //if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchCamStyle(CameraStyle.Combat);
+        //if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchCamStyle(CameraStyle.Topdown);
 
         if (currentCamStyle == CameraStyle.Basic || currentCamStyle == CameraStyle.Topdown)
         {

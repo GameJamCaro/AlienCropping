@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     int playerScore;
     int seedScore;
 
+    public GameObject winPanel; 
+
     public ScoreDisplay[] scoreUIs;
 
     private void Start()
@@ -59,7 +61,11 @@ public class GameManager : MonoBehaviour
     public static void AddScore(int scoreAmount)
     {
         score += scoreAmount;
-        GameManager.UpdateUI();    
+        GameManager.UpdateUI();
+        if(score >= 30)
+        {
+            GameManager.instance.Win();
+        }
         
     }
     public static void AddSeed(int scoreAmount)
@@ -86,6 +92,12 @@ public class GameManager : MonoBehaviour
        
         instance.scoreUIs[0].DisplayScore();
         instance.scoreUIs[1].DisplayScore();
+    }
+
+    public void Win()
+    {
+        winPanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
     

@@ -9,5 +9,7 @@ public class Changer : MonoBehaviour
     public enum ChangeType {Health, Score, Seed};
     public ChangeType changeType;
 
+    public bool isDead;
+
 
 }

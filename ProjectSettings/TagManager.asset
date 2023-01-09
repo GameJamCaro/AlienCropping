@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Projectile
   - GrowingArea
+  - Plant
+  - ExplosionSound
   layers:
   - Default
   - TransparentFX

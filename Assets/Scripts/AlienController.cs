@@ -11,6 +11,12 @@ public class AlienController : MonoBehaviour
     Quaternion spreadRotation;
     public GameObject[] drops;
     public int dropNumber;
+    public Animator anim;
+    public AudioSource deathSound;
+    bool isDead;
+
+    public Transform spreadSpot;
+    public AudioSource enemyHit;
 
 
 
@@ -28,25 +34,38 @@ public class AlienController : MonoBehaviour
     {
         agent.SetDestination(player.transform.position);
 
-        if(Vector3.Distance(transform.position, player.transform.position) < 30)
+        if (Vector3.Distance(transform.position, player.transform.position) < 30)
         {
-            player.GetComponentInChildren<Shooter>().CameraSwitch();
+            //player.GetComponentInChildren<Shooter>().CameraSwitch();
         }
     }
 
+
+    bool once;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Projectile"))
         {
             health -= 1;
+            enemyHit.pitch = Random.Range(1, 1.5f);
+            enemyHit.Play();
             if (health < 1)
             {
-                for (int i = 0; i < dropNumber; i++)
+               
+                if (!once)
                 {
-                    spreadRotation.eulerAngles = new Vector3(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180));
-                    Instantiate(drops[Random.Range(0,drops.Length)], transform.position, spreadRotation);
+                    for (int i = 0; i < dropNumber; i++)
+                    {
+                        spreadRotation.eulerAngles = new Vector3(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180));
+                        Instantiate(drops[Random.Range(0, drops.Length)], spreadSpot.position, spreadRotation);
+                    }
+                    anim.SetTrigger("death");
+
+                    deathSound.Play();
+                    once = true;
+                    isDead = true;
                 }
-                Destroy(gameObject);
+                Destroy(gameObject, 1);
             }
             
 

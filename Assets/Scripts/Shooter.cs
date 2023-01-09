@@ -26,6 +26,8 @@ public class Shooter : MonoBehaviour
 
     public Transform shotLocation;
 
+    public AudioSource shotSound;
+
 
     private void Start()
     {
@@ -39,12 +41,17 @@ public class Shooter : MonoBehaviour
     {
         if (shooterType == Type.Player)
         {
+            
             if (Input.GetButtonDown("Fire1"))
             {
+
+                target.GetComponentInChildren<Shooter>().CameraSwitch();
+
                 player.Shoot();
                 
                 if (Time.time > fireRate + lastShot)
                 {
+                    shotSound.Play();
                     clone = Instantiate(projectile, transform.position, transform.rotation);
 
                     clone.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
@@ -57,11 +64,16 @@ public class Shooter : MonoBehaviour
         }
         else
         {
-            if (Vector3.Distance(transform.position, target.position) < shootDistance && !doNotShoot)
+            if (Vector3.Distance(transform.position, target.position) < shootDistance)
             {
-                Vector3 targetPos = target.position;
-                // targetPos.y = 0;
-                transform.LookAt(targetPos);
+                //target.GetComponentInChildren<Shooter>().CameraSwitch();
+            }
+
+
+
+            if (/*Vector3.Distance(transform.position, target.position) < shootDistance && */ !doNotShoot)
+            {
+               
                 StartCoroutine(WaitAndShoot());
                 doNotShoot = true;
 
@@ -70,18 +82,30 @@ public class Shooter : MonoBehaviour
             {
                 StopCoroutine(WaitAndShoot());
             }
+
+           
+               
+
+           
+           
         }
 
         void ShootAtTarget() 
         {
-            
-            
-                clone = Instantiate(projectile, shotLocation.position, shotLocation.rotation );
 
-                clone.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
 
-                
-            Destroy(clone.gameObject, 2);
+            if (shotLocation != null)
+            {
+                clone = Instantiate(projectile, shotLocation.position, shotLocation.rotation);
+
+                if (clone != null)
+                {
+                    clone.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
+
+
+                    Destroy(clone.gameObject, 2);
+                }
+            }
         }
 
 
@@ -92,7 +116,6 @@ public class Shooter : MonoBehaviour
             ShootAtTarget();
            
             yield return new WaitForSeconds(shotInterval);
-            
             doNotShoot = false;
             StartCoroutine(WaitAndShoot());
         }
@@ -121,7 +144,7 @@ public class Shooter : MonoBehaviour
         if (cam.currentCamStyle != ThirdPersonCam.CameraStyle.Combat)
         {
             cam.SwitchCamStyle(ThirdPersonCam.CameraStyle.Combat);
-            StartCoroutine(WaitAndResetCam());
+            //StartCoroutine(WaitAndResetCam());
         }
     }
 }

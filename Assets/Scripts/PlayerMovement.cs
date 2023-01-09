@@ -67,13 +67,13 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
-        {
-            readyToJump = false;
-            Jump();
-            Invoke(nameof(ResetJump), jumpCooldown);
-            anim.SetTrigger("jump");
-        }
+        //if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        //{
+        //    readyToJump = false;
+        //    Jump();
+        //    Invoke(nameof(ResetJump), jumpCooldown);
+        //    anim.SetTrigger("jump");
+        //}
     }
 
 
